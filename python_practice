@@ -1,0 +1,25 @@
+#Given a list of integers nums, return the k most frequent elements.
+#You may return the answer in any order.
+#Input: nums = [1,1,1,2,2,3], k = 2  
+#Output: [1, 2] 
+==================
+import heapq
+from collections import Counter
+
+def topKFrequent(nums, k):
+    # Step 1: Count frequencies
+    freq = Counter(nums)
+
+    # Step 2: Use a min-heap to keep top k
+    heap = []
+
+    for num, count in freq.items():
+        heapq.heappush(heap, (count, num))
+        if len(heap) > k:
+            heapq.heappop(heap)
+
+    # Step 3: Extract numbers from the heap
+    return [num for count, num in heap]
+
+
+	
